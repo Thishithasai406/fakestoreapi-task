@@ -1,4 +1,3 @@
-app.jsx
 import { useEffect, useState } from 'react';
 
 const API_BASE = 'https://fakestoreapi.com';
@@ -58,21 +57,24 @@ function App() {
 
       <section className="controls">
         <div className="category-panel">
-          <h2>Filter by Category</h2>
+          <label htmlFor="category-select" className="filter-label">
+            Filter by Category
+          </label>
           {loading ? (
             <p>Loading categories…</p>
           ) : (
-            <div className="category-buttons">
+            <select
+              id="category-select"
+              className="category-dropdown"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
               {categories.map((category) => (
-                <button
-                  key={category}
-                  className={category === selectedCategory ? 'category active' : 'category'}
-                  onClick={() => setSelectedCategory(category)}
-                >
+                <option key={category} value={category}>
                   {category === 'all' ? 'All Products' : category}
-                </button>
+                </option>
               ))}
-            </div>
+            </select>
           )}
         </div>
       </section>
